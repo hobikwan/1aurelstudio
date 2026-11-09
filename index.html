@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1aurel_studio｜穿搭避雷指南</title>
+<style>
+:root {
+  --bg:#f7f6f2;
+  --paper:#fffefa;
+  --ink:#292c28;
+  --muted:#6b7068;
+  --line:#e3e4dc;
+  --accent:#52644d;
+  --soft:#e4eadf;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;
+  line-height:1.7;
+}
+button,a{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+[hidden]{display:none!important}
+.container{width:min(1080px,calc(100% - 40px));margin:auto}
+header{
+  position:sticky;top:0;z-index:20;
+  background:var(--bg);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{
+  height:72px;display:flex;align-items:center;
+  justify-content:space-between;
+}
+.logo{font-size:21px;font-weight:800}
+.header-right{display:flex;align-items:center;gap:20px}
+.header-right>a{font-size:13px;color:var(--accent)}
+.menu-btn{
+  width:44px;height:44px;border:1px solid var(--line);
+  background:var(--paper);border-radius:50%;font-size:23px;
+}
+.menu-overlay{
+  position:fixed;inset:0;z-index:30;
+  background:#0006;
+}
+.menu-panel{
+  position:absolute;right:0;top:0;height:100%;
+  width:min(380px,100%);background:var(--paper);
+  padding:30px;overflow:auto;
+}
+.menu-close{float:right;border:0;background:none;font-size:30px}
+.menu-panel h2{font-size:21px;margin:15px 0 35px}
+.menu-panel a{
+  display:block;padding:16px 0;
+  border-bottom:1px solid var(--line);
+}
+.eyebrow{
+  color:var(--accent);font-size:11px;
+  font-weight:800;letter-spacing:3px;
+}
+.hero{padding:75px 0}
+.hero-grid{
+  display:grid;grid-template-columns:1.05fr .95fr;
+  align-items:center;gap:70px;
+}
+.hero h1{
+  font-size:clamp(40px,5vw,65px);
+  line-height:1.25;letter-spacing:-2px;margin:20px 0;
+}
+.hero h1 span{color:var(--accent)}
+.hero p{color:var(--muted);max-width:450px}
+.btn{
+  display:inline-block;background:var(--accent);color:white;
+  border:1px solid var(--accent);border-radius:7px;
+  padding:14px 25px;font-weight:700;margin-top:18px;
+}
+.btn:hover{background:#40523b}
+.btn-light{background:transparent;color:var(--accent)}
+.hero-art{
+  height:440px;background:#e6e7df;
+  border-radius:190px 190px 12px 12px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.hero-art:before{
+  content:"";position:absolute;width:290px;height:290px;
+  background:#d9ded2;border-radius:50%;top:60px;
+}
+.shirt{
+  position:absolute;top:115px;width:220px;height:200px;
+  background:linear-gradient(120deg,#fffefa,#e5e6db);
+  clip-path:polygon(10% 10%,30% 0,43% 8%,50% 17%,57% 8%,70% 0,90% 10%,100% 45%,82% 53%,79% 100%,21% 100%,18% 53%,0 45%);
+  z-index:2;
+}
+.pants{
+  position:absolute;top:280px;width:145px;height:200px;
+  background:#71786d;
+  clip-path:polygon(0 0,100% 0,97% 100%,52% 100%,49% 20%,45% 100%,0 100%);
+}
+.art-caption{
+  position:absolute;top:45px;left:35px;
+  font-family:Georgia,serif;font-style:italic;
+  color:#74806d;font-size:20px;
+}
+.steps{background:#f0f1eb;border-block:1px solid var(--line)}
+.steps-inner{display:grid;grid-template-columns:repeat(3,1fr)}
+.step{padding:22px;border-right:1px solid var(--line)}
+.step:last-child{border:0}
+.step b{color:var(--accent);font-size:24px;margin-right:12px}
+section.content{padding:85px 0}
+.section-title{font-size:clamp(29px,4vw,43px);margin:12px 0}
+.section-desc{color:var(--muted);font-size:14px}
+.cards{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:16px;margin-top:35px;
+}
+.card{
+  padding:28px;background:var(--paper);
+  border:1px solid var(--line);border-radius:13px;
+}
+.card .num{font:italic 27px Georgia;color:#8a9784}
+.card h3{font-size:17px}
+.card p{font-size:13px;color:var(--muted)}
+.quiz-section{background:#ebeee8;padding:75px 20px}
+.quiz-heading{text-align:center;margin-bottom:35px}
+.quiz-card{
+  max-width:790px;margin:auto;background:var(--paper);
+  padding:clamp(24px,5vw,50px);
+  border:1px solid #dfe4da;border-radius:15px;
+}
+.progress{height:6px;background:#e5e9e1;border-radius:10px;margin:20px 0 35px}
+.progress-fill{height:100%;background:var(--accent);border-radius:10px;transition:.3s}
+.question-label{font-size:12px;color:var(--accent);font-weight:700}
+.question-title{font-size:26px;line-height:1.4}
+.question-sub{color:var(--muted);font-size:13px}
+.answer{
+  width:100%;text-align:left;background:white;
+  padding:17px;margin:8px 0;
+  border:1px solid var(--line);border-radius:9px;
+}
+.answer:hover,.answer.active{
+  background:#edf2e9;border-color:var(--accent);
+}
+.quiz-actions{
+  display:flex;justify-content:space-between;
+  gap:12px;margin-top:25px;
+}
+.quiz-actions button:disabled{opacity:.4}
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:13px;font-weight:700}
+.field input,.field select{
+  padding:12px;border:1px solid var(--line);
+  border-radius:7px;font:inherit;width:100%;
+}
+.result-tags{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.tag{
+  background:#edf2e9;color:#466144;border-radius:25px;
+  padding:6px 13px;font-size:12px;font-weight:700;
+}
+.result-block{padding:22px 0;border-top:1px solid var(--line)}
+.result-block h3{margin-top:0}
+.recommend-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+}
+.recommend{
+  padding:18px;background:#f7f9f4;
+  border:1px solid #dfe5da;border-radius:10px;
+}
+.recommend strong{display:block;margin-bottom:8px}
+.recommend p{font-size:12px;color:var(--muted)}
+.tip{
+  background:#f6f7f2;border:1px solid #e8ebe3;
+  padding:16px;border-radius:9px;margin:10px 0;
+}
+.tip strong{display:block}
+.tip p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.check{display:block;margin:12px 0;font-size:13px}
+.check input{accent-color:var(--accent)}
+footer{
+  background:#e8ece5;text-align:center;
+  padding:45px 20px;color:var(--muted);
+}
+footer strong{color:var(--ink)}
+@media(max-width:750px){
+  .hero-grid{grid-template-columns:1fr;gap:35px}
+  .hero{padding:55px 0}
+  .hero-art{height:350px;max-width:390px;width:100%;margin:auto}
+  .steps-inner{grid-template-columns:1fr}
+  .step{border-right:0;border-bottom:1px solid var(--line)}
+  .cards{grid-template-columns:1fr}
+  .recommend-grid{grid-template-columns:1fr}
+  .field-grid{grid-template-columns:1fr}
+  .header-right>a{display:none}
+  .hero h1{font-size:42px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a class="logo" href="#home">1aurel_studio</a>
+    <div class="header-right">
+      <a href="#quiz" onclick="openQuiz()">開始穿搭測驗</a>
+      <button class="menu-btn" onclick="toggleMenu(true)" aria-label="開啟選單">☰</button>
+    </div>
+  </div>
+</header>
+
+<div id="menu" class="menu-overlay" hidden>
+  <div class="menu-panel">
+    <button class="menu-close" onclick="toggleMenu(false)">×</button>
+    <h2>1aurel_studio</h2>
+    <span class="eyebrow">EXPLORE</span>
+    <a href="#home" onclick="toggleMenu(false)">首頁 →</a>
+    <a href="#styles" onclick="toggleMenu(false)">穿搭指南 →</a>
+    <a href="#quiz" onclick="openQuiz();toggleMenu(false)">穿搭避雷測驗 →</a>
+    <br>
+    <span class="eyebrow">FOLLOW US</span>
+    <a href="https://myship.7-11.com.tw/general/detail/GM2610278630977" target="_blank">7-ELEVEN 賣貨便 ↗</a>
+    <a href="https://www.instagram.com/1aurel_studio/" target="_blank">Instagram ↗</a>
+    <a href="https://www.threads.com/@1aurel_studio" target="_blank">Threads ↗</a>
+  </div>
+</div>
+
+<main>
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">1AUREL STUDIO · YOUR FIT GUIDE</span>
+      <h1>找到適合自己的<br><span>日常穿搭。</span></h1>
+      <p>網購衣服，除了喜歡，也要穿得適合自己。</p>
+      <p>從版型、尺寸、顏色到材質，透過簡單的測驗，找到更符合你需求的選購方向。</p>
+      <button class="btn" onclick="openQuiz()">開始穿搭避雷測驗 →</button>
+      <p style="font-size:12px">約 2 分鐘 · 7 道問題 · 免費測驗</p>
+    </div>
+    <div class="hero-art">
+      <span class="art-caption">Everyday, your way.</span>
+      <div class="pants"></div>
+      <div class="shirt"></div>
+    </div>
+  </div>
+</section>
+
+<div class="steps">
+  <div class="container steps-inner">
+    <div class="step"><b>01</b> 了解你的穿衣需求</div>
+    <div class="step"><b>02</b> 找到適合的選購方向</div>
+    <div class="step"><b>03</b> 更安心地挑選衣服</div>
+  </div>
+</div>
+
+<section class="content" id="styles">
+  <div class="container">
+    <span class="eyebrow">SHOP SMARTER</span>
+    <h2 class="section-title">網購衣服，不再只靠感覺。</h2>
+    <p class="section-desc">從每一個選購細節開始，找到更適合自己的衣服。</p>
+    <div class="cards">
+      <div class="card">
+        <span class="num">01</span>
+        <h3>版型與剪裁</h3>
+        <p>留意肩線、胸寬、腰身與衣長，選擇符合自己穿著偏好的剪裁。</p>
+      </div>
+      <div class="card">
+        <span class="num">02</span>
+        <h3>材質與觸感</h3>
+        <p>柔軟、透氣、挺版或彈性，找到自己真正喜歡的穿著感受。</p>
+      </div>
+      <div class="card">
+        <span class="num">03</span>
+        <h3>尺寸與顏色</h3>
+        <p>比對實際尺寸、實拍照片與顏色描述，減少網購落差。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quiz" class="quiz-section" hidden>
+  <div class="quiz-heading">
+    <span class="eyebrow">YOUR FIT GUIDE</span>
+    <h2 class="section-title">你的專屬穿搭避雷測驗</h2>
+    <p class="section-desc">用 7 個簡單問題，更了解自己的穿衣需求。</p>
+  </div>
+
+  <div class="quiz-card" id="quiz-card">
+    <div id="question-view">
+      <span id="question-count" class="question-label"></span>
+      <div class="progress"><div class="progress-fill" id="progress-fill"></div></div>
+      <h2 class="question-title" id="question-title"></h2>
+      <p class="question-sub" id="question-sub"></p>
+      <div id="answer-list"></div>
+      <div class="quiz-actions">
+        <button class="btn btn-light" id="back-button">上一題</button>
+        <button class="btn" id="next-button">下一題 →</button>
+      </div>
+    </div>
+
+    <div id="size-view" hidden>
+      <span class="eyebrow">OPTIONAL SIZE GUIDE</span>
+      <h2>讓我們更了解你的尺寸</h2>
+      <p class="section-desc">以下資料可自由選填，也可以直接跳過。</p>
+      <div class="field-grid" style="margin-top:25px">
+        <div class="field"><label>身高（cm）</label><input type="number" id="height"></div>
+        <div class="field"><label>平常穿的尺寸</label>
+          <select id="usual">
+            <option value="">請選擇</option>
+            <option>XS</option><option>S</option><option>M</option>
+            <option>L</option><option>XL</option><option>不固定</option>
+          </select>
+        </div>
+        <div class="field"><label>胸圍（cm）</label><input type="number" id="chest"></div>
+        <div class="field"><label>腰圍（cm）</label><input type="number" id="waist"></div>
+        <div class="field"><label>臀圍（cm）</label><input type="number" id="hips"></div>
+      </div>
+      <p class="section-desc" style="margin-top:20px">尺寸資料只用於本次頁面建議，不會自動上傳。</p>
+      <div class="quiz-actions">
+        <button class="btn btn-light" onclick="showQuestion()">返回</button>
+        <button class="btn btn-light" onclick="showResult(true)">略過</button>
+        <button class="btn" onclick="showResult(false)">查看結果 →</button>
+      </div>
+    </div>
+
+    <div id="result-view" hidden>
+      <span class="eyebrow">1AUREL STUDIO · YOUR FIT GUIDE</span>
+      <h2 id="result-title"></h2>
+      <p class="section-desc">依照你的回答，整理出適合你的選購方向。</p>
+      <div id="result-tags" class="result-tags"></div>
+
+      <div class="result-block">
+        <h3>你的穿搭偏好</h3>
+        <p id="result-summary"></p>
+      </div>
+
+      <div class="result-block">
+        <h3>為你推薦的單品類型</h3>
+        <div id="recommend-list" class="recommend-grid"></div>
+      </div>
+
+      <div class="result-block">
+        <h3>你的專屬網購避雷提醒</h3>
+        <div id="tip-list"></div>
+      </div>
+
+      <div class="result-block">
+        <h3>購買前檢查清單</h3>
+        <div id="check-list"></div>
+      </div>
+
+      <div id="size-summary" class="tip" hidden></div>
+
+      <p class="section-desc">
+        以上為穿搭偏好建議，實際尺寸仍需與商品平量數據比對。
+      </p>
+
+      <a class="btn" href="https://myship.7-11.com.tw/general/detail/GM2610278630977" target="_blank">前往 1aurel_studio 賣場 →</a>
+      <button class="btn btn-light" onclick="restartQuiz()">重新測驗</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <strong>1aurel_studio</strong>
+  <p>Find your fit. Wear your confidence.</p>
+  <small>© 1aurel_studio</small>
+</footer>
+
+<script>
+const $=id=>document.getElementById(id);
+
+const questions=[
+  {
+    title:"你平常買衣服，最常遇到什麼困擾？",
+    sub:"找出你最想避免的網購問題",
+    options:["尺寸不合，太大或太小","版型不適合，穿起來不好看","顏色跟想像中不一樣","材質不舒服，跟照片有落差"]
+  },
+  {
+    title:"你喜歡衣服穿起來是什麼感覺？",
+    sub:"了解你偏好的合身程度",
+    options:["寬鬆舒服，有空間感","剛剛好合身，不緊也不鬆","修身一點，喜歡俐落線條","看衣服款式決定"]
+  },
+  {
+    title:"挑選上衣時，你最在意哪個部位？",
+    sub:"幫助篩選適合的剪裁",
+    options:["肩膀與肩線","胸圍與腰身","衣長與整體比例","手臂與袖子"]
+  },
+  {
+    title:"哪一種顏色的衣服你最常穿？",
+    sub:"從熟悉的配色開始推薦",
+    options:["黑、白、灰等基本色","米白、奶茶、咖啡等暖色","藍、灰藍等冷色","各種顏色都願意嘗試"]
+  },
+  {
+    title:"你最喜歡哪種穿起來的材質感？",
+    sub:"降低材質不符合期待的機率",
+    options:["柔軟親膚，不喜歡刺癢","輕薄透氣，不喜歡悶熱","挺版有型，喜歡有輪廓","有彈性，活動方便"]
+  },
+  {
+    title:"你平常最常穿衣服的場合是？",
+    sub:"讓推薦更貼近日常生活",
+    options:["上學、上班、日常外出","約會、聚餐、拍照","逛街、旅行、休閒活動","各種場合都希望能搭配"]
+  },
+  {
+    title:"你最希望衣服幫你達到什麼效果？",
+    sub:"找出你最重視的穿搭目標",
+    options:["整體比例看起來更修長","修飾自己在意的部位","穿得舒服又有質感","簡單搭配就很好看"]
+  }
+];
+
+let step=0;
+let answers=Array(7).fill(-1);
+
+function toggleMenu(open){
+  $("menu").hidden=!open;
+  document.body.style.overflow=open?"hidden":"";
+}
+
+function openQuiz(){
+  $("quiz").hidden=false;
+  showQuestion();
+  setTimeout(()=>$("quiz").scrollIntoView({behavior:"smooth"}),50);
+}
+
+function showQuestion(){
+  $("question-view").hidden=false;
+  $("size-view").hidden=true;
+  $("result-view").hidden=true;
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q=questions[step];
+  $("question-count").textContent=`第 ${step+1} 題，共 7 題`;
+  $("progress-fill").style.width=((step+1)/7*100)+"%";
+  $("question-title").textContent=q.title;
+  $("question-sub").textContent=q.sub;
+  $("answer-list").innerHTML="";
+
+  q.options.forEach((text,i)=>{
+    const b=document.createElement("button");
+    b.className="answer"+(answers[step]===i?" active":"");
+    b.textContent="◯　"+text;
+    b.onclick=()=>{
+      answers[step]=i;
+      renderQuestion();
+    };
+    $("answer-list").appendChild(b);
+  });
+
+  $("back-button").disabled=step===0;
+  $("next-button").disabled=answers[step]===-1;
+  $("next-button").textContent=step===6?"下一步：選填尺寸 →":"下一題 →";
+}
+
+$("back-button").onclick=()=>{
+  if(step>0){step--;renderQuestion()}
+};
+
+$("next-button").onclick=()=>{
+  if(answers[step]<0)return;
+  if(step<6){
+    step++;
+    renderQuestion();
+  }else{
+    $("question-view").hidden=true;
+    $("size-view").hidden=false;
+  }
+};
+
+function showResult(skip){
+  if(!skip){
+    const limits={height:[80,230],chest:[40,200],waist:[35,200],hips:[40,220]};
+    for(const [id,[min,max]] of Object.entries(limits)){
+      const raw=$(id).value;
+      if(raw && (+raw<min || +raw>max || !Number.isFinite(+raw))){
+        alert("請確認尺寸資料，或留空略過。");
+        return;
+      }
+    }
+  }
+
+  $("question-view").hidden=true;
+  $("size-view").hidden=true;
+  $("result-view").hidden=false;
+
+  const fit=["寬鬆有型","自然合身","俐落修身","多變穿搭"][answers[1]];
+  const color=["黑白灰基本色","溫柔暖色系","清爽冷色系","多元配色"][answers[3]];
+  const fabric=["柔軟親膚","輕薄透氣","挺版輪廓","舒適彈性"][answers[4]];
+  const scene=["日常通勤","約會聚餐","休閒旅行","多場合穿搭"][answers[5]];
+
+  $("result-title").textContent=fit+"｜你的專屬選購指南";
+  $("result-tags").innerHTML=[fit,color,fabric,scene].map(x=>`<span class="tag">${x}</span>`).join("");
+
+  $("result-summary").textContent=
+    `你偏好${fit}的穿著感，常選擇${color}，喜歡${fabric}的材質感。`+
+    `主要穿著場合是${scene}，因此推薦從這些需求出發挑選衣服。`;
+
+  let items=[];
+
+  if(answers[4]===2){
+    items.push(["挺版襯衫","有結構感的剪裁，符合你喜歡的輪廓。","確認胸寬、肩線及布料挺度。"]);
+  }else if(answers[4]===0){
+    items.push(["親膚日常上衣","優先考慮舒適觸感。","確認材質成分與內裡。"]);
+  }else if(answers[4]===1){
+    items.push(["輕薄休閒襯衫","適合日常搭配與分層穿著。","確認厚薄、透氣與透光度。"]);
+  }else{
+    items.push(["彈性休閒上衣","適合重視活動方便的穿著需求。","確認彈性與洗滌方式。"]);
+  }
+
+  items.push([
+    answers[1]===0?"寬鬆版型外套":"簡約剪裁外套",
+    "可以增加日常搭配層次。",
+    "確認肩寬、胸寬及內搭空間。"
+  ]);
+
+  items.push([
+    answers[5]===2?"舒適直筒長褲":"百搭直筒長褲",
+    "適合日常外出與不同上衣搭配。",
+    "確認腰圍、臀圍、褲襠與褲長。"
+  ]);
+
+  $("recommend-list").innerHTML=items.map((x,i)=>`
+    <div class="recommend">
+      <span class="eyebrow">0${i+1} / STYLE PICK</span>
+      <strong>${x[0]}</strong>
+      <p>${x[1]}</p>
+      <p>購買前留意｜${x[2]}</p>
+    </div>
+  `).join("");
+
+  const problemTips=[
+    "比對商品平量尺寸，不要只看 S、M、L。",
+    "留意肩線、胸腰剪裁、衣長與不同角度實拍。",
+    "比較自然光照片，留意螢幕色差。",
+    "確認材質成分、厚薄、彈性與觸感描述。"
+  ];
+
+  const focusTips=[
+    "確認肩寬、肩線位置及袖長。",
+    "確認胸寬、腰部剪裁及下擺寬度。",
+    "確認衣長、腰線與上下身比例。",
+    "確認袖圍、袖長及手臂活動空間。"
+  ];
+
+  const fabricTips=[
+    "留意布料是否親膚、是否有內裡及刺癢風險。",
+    "確認布料厚薄、透氣性與透光程度。",
+    "確認布料挺度、織法及實際厚度。",
+    "確認布料伸縮程度與活動舒適度。"
+  ];
+
+  const colorTips=[
+    "留意黑白灰在不同光源下的色差。",
+    "比較米色、奶茶色及咖啡色的實拍色調。",
+    "比較藍色與灰藍色的實拍色調。",
+    "依自己的衣櫃搭配需求挑選顏色。"
+  ];
+
+  const tips=[
+    ["最在意的網購問題",problemTips[answers[0]]],
+    ["版型與尺寸",focusTips[answers[2]]],
+    ["材質",fabricTips[answers[4]]],
+    ["顏色",colorTips[answers[3]]]
+  ];
+
+  $("tip-list").innerHTML=tips.map((x,i)=>`
+    <div class="tip">
+      <strong>0${i+1}｜${x[0]}</strong>
+      <p>${x[1]}</p>
+    </div>
+  `).join("");
+
+  const checks=[
+    "確認商品平量尺寸，並與自己穿得舒服的衣服比較。",
+    "確認材質成分、厚薄、彈性及實拍照片。",
+    "確認模特兒身高與實際穿著尺寸。",
+    "確認商品洗滌方式及賣場退換貨資訊。"
+  ];
+
+  $("check-list").innerHTML=checks.map(x=>`
+    <label class="check"><input type="checkbox"> ${x}</label>
+  `).join("");
+
+  const fields=[
+    ["height","身高"],["usual","平常尺寸"],
+    ["chest","胸圍"],["waist","腰圍"],["hips","臀圍"]
+  ];
+
+  const sizeData=skip?[]:fields.filter(([id])=>$(id).value).map(([id,label])=>
+    `${label}：${$(id).value}${id==="usual"?"":" cm"}`
+  );
+
+  $("size-summary").hidden=sizeData.length===0;
+  $("size-summary").textContent=sizeData.join("／")+
+    "。此資料僅供參考，仍需比對商品實際尺寸。";
+
+  $("quiz-card").scrollIntoView({behavior:"smooth"});
+}
+
+function restartQuiz(){
+  step=0;
+  answers=Array(7).fill(-1);
+  ["height","chest","waist","hips"].forEach(id=>$(id).value="");
+  $("usual").value="";
+  showQuestion();
+  $("quiz-card").scrollIntoView({behavior:"smooth"});
+}
+
+document.querySelectorAll('a[href="#quiz"]').forEach(a=>{
+  a.addEventListener("click",e=>{
+    e.preventDefault();
+    openQuiz();
+  });
+});
+
+if(location.hash==="#quiz")$("quiz").hidden=false;
+renderQuestion();
+</script>
+
+</body>
+</html>
